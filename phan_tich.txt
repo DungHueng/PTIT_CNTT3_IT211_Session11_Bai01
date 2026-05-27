@@ -1,0 +1,19 @@
+1. Lỗi với cân nặng số lẻ (ví dụ: 1.5kg)
+Quy tắc: 1kg đầu tiên = 50.000 VND, mỗi kg hoặc phần lẻ thêm 10.000 VND.
+- Code hiện tại dùng Math.floor(weightKg - 1) → chỉ lấy phần nguyên, bỏ qua phần lẻ.
+- Ví dụ: 1.5kg → Math.floor(0.5) = 0 → phí = 50.000 VND (sai).
+- Đúng phải là 60.000 VND.
+=> Lỗi logic: Dùng Math.floor thay vì Math.ceil.
+
+2. Lỗi với khoảng cách ngưỡng biên (ví dụ: 49km, 50km)
+Quy tắc:
+< 10km: miễn phí
+10–49km: 5.000 VND/km
+≥ 50km: 4.000 VND/km
+
+Code hiện tại:
+49km → 49 × 5.000 = 245.000 VND
+50km → 50 × 4.000 = 200.000 VND
+
+Kết quả: phí giảm khi đi xa hơn (nghịch lý).
+=> Lỗi logic: Code đúng quy tắc, nhưng quy tắc nghiệp vụ chưa hợp lý → gây bất thường ở biên.
